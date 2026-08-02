@@ -59,7 +59,7 @@ impl<R: Read> Read for ADBRecvCommandReader<R> {
             let data_to_read = std::cmp::min(self.remaining_data_bytes_to_read, buf.len());
             self.inner.read_exact(&mut buf[..data_to_read])?;
 
-            self.remaining_data_bytes_to_read -= self.remaining_data_bytes_to_read;
+            self.remaining_data_bytes_to_read -= data_to_read;
 
             Ok(data_to_read)
         }
